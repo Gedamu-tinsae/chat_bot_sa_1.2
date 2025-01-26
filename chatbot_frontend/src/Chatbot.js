@@ -24,7 +24,7 @@ function Chatbot() {
     setLoading(true);
 
     try {//http://127.0.0.1:5000/chat
-      const response = await axios.post('https://chat-bot-sa.onrender.com/', {
+      const response = await axios.post('https://chat-bot-sa.onrender.com/chat', {
         message: input.trim(),
       });
 

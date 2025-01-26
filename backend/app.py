@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins
 
 # Hugging Face API Key
 HF_API_KEY = os.getenv('HF_API_KEY') 
@@ -71,6 +71,11 @@ def get_hugging_face_response(user_message):
     except Exception as e:
         print("Error from Hugging Face:", e)
         return f"Error occurred: {str(e)}"
+    
+@app.route('/')
+def home():
+    return "Backend is running!"
+
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -108,7 +113,6 @@ def chat():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 5000))  # Use PORT from environment or default to 5000
+    port = int(os.environ.get("PORT", 5000)) 
     app.run(host="0.0.0.0", port=port)
 
