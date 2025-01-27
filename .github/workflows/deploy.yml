@@ -1,0 +1,48 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull request targeting the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Choose the latest Ubuntu for the runner
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Set up Node.js environment (required for React build)
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Use the Node.js version that you are working with
+
+    # Install dependencies
+    - name: Install dependencies
+      run: |
+        cd chatbot_frontend  # Navigate to frontend directory
+        npm install
+
+    # Replace backend URL with the Render backend URL
+    - name: Update backend URL in chatbot.js
+      run: |
+        sed -i 's|http://127.0.0.1:5000/chat|https://chat-bot-sa.onrender.com/chat|g' chatbot_frontend/src/chatbot.js
+
+    # Build the React app
+    - name: Build the React app
+      run: |
+        cd chatbot_frontend  # Navigate to frontend directory
+        npm run build
+
+    # Deploy the build to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        gh-pages-branch: gh-pages  # Push to the gh-pages branch
+        publish_dir: chatbot_frontend/build  # The build folder to deploy
