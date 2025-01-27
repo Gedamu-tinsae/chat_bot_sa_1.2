@@ -35,7 +35,7 @@ jobs:
     # Replace backend URL with the Render backend URL
     - name: Update backend URL in chatbot.js
       run: |
-        sed -i 's|http://127.0.0.1:5000/chat|https://chat-bot-sa.onrender.com/chat|g' chatbot_frontend/src/Chatbot.js
+        sed -i 's|http://127.0.0.1:5000/chat|https://chat-bot-sa-1-2.onrender.com/chat|g' chatbot_frontend/src/Chatbot.js
 
     # Build the React app
     - name: Build the React app
