@@ -32,7 +32,7 @@ jobs:
     # Replace backend URL with the Render backend URL
     - name: Update backend URL in chatbot.js
       run: |
-        sed -i 's|http://127.0.0.1:5000/chat|https://chat-bot-sa.onrender.com/chat|g' chatbot_frontend/src/chatbot.js
+        sed -i 's|http://127.0.0.1:5000/chat|https://chat-bot-sa.onrender.com/chat|g' chatbot_frontend/src/Chatbot.js
 
     # Build the React app
     - name: Build the React app
@@ -44,5 +44,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        gh-pages-branch: gh-pages  # Push to the gh-pages branch
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the default GitHub token
+        publish_branch: gh-pages  # Correct branch to deploy to
         publish_dir: chatbot_frontend/build  # The build folder to deploy
