@@ -11,6 +11,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Choose the latest Ubuntu for the runner
+    
+    permissions:
+      contents: write  # Allow write access to repository contents
 
     steps:
     # Checkout the code
