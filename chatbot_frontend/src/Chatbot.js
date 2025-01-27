@@ -23,8 +23,8 @@ function Chatbot() {
     setInput('');
     setLoading(true);
 
-    try {//http://127.0.0.1:5000/chat
-      const response = await axios.post('https://chat-bot-sa.onrender.com/chat', {
+    try {//http://127.0.0.1:5000/chat           
+      const response = await axios.post('http://127.0.0.1:5000/chat ', {
         message: input.trim(),
       });
 
@@ -65,8 +65,8 @@ function Chatbot() {
   }, [messages]); // Trigger this effect when messages change
 
   //icons
-  const botIcon = "🤖";  // Add an emoji or an image here for the bot icon
-  const userIcon = "👤";  // Add an emoji or an image here for the user icon
+  const botIcon = "🤖";  
+  const userIcon = "👤";  
 
   return (
     <div className="chat-widget">
